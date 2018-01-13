@@ -31,13 +31,30 @@ describe('#user', function() {
       assert.deepEqual(user.getUserInfo('santosh'), {})
     })
   })
-  describe('#chnageTitle', function() {
+  describe('#changeTitle', function() {
     it('should be able to change the title of todo', function() {
       user.loadAllUsers();
       user.addTodoList('santosh', 'NOTHING', 'nothing');
       user.changeTitle('santosh','NOTHING','SOMETHING')
-      console.log(user.getUserInfo('santosh'));
       assert.equal(user.getUserInfo('santosh')['SOMETHING'].description, 'nothing')
+    })
+  })
+  describe('#changeDescription', function() {
+    it('should be able to change the title of todo', function() {
+      user.loadAllUsers();
+      user.addTodoList('santosh', 'NOTHING', 'nothing');
+      user.changeDescription('santosh','NOTHING','SOMETHING')
+      assert.equal(user.getUserInfo('santosh')['NOTHING'].description, 'SOMETHING')
+    })
+  })
+  describe('#addTask', function() {
+    it('should be able to change the title of todo', function() {
+      user.loadAllUsers();
+      user.addTodoList('santosh', 'NOTHING', 'nothing');
+      user.addTask('santosh','NOTHING','do something');
+      let actual=user.getTasks('santosh','NOTHING')['do something'].task
+      let expected='do something'
+      assert.equal(actual,expected);
     })
   })
 })
